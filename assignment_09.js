@@ -1,6 +1,6 @@
 const Student = {
-  id: 101,
-  firstName: "Jhon",
+  id: 102,
+  firstName: 'labib',
   lastName: "Hasan",
   phone: 1521334597,
 
@@ -26,132 +26,117 @@ const Student = {
     postcode: 8602,
   },
 
-  subjectId: [101, 102, 103, 104, 110, 500],
+  subjectId: [10, 20, 30],
   dateOfBirth: "15.06.2000",
 };
 
 function input() {
   
+
   if (Student.id == undefined) {
     throw "id is required";
-  } else if (typeof Student.id == "number") {
-    throw "Student id has to be a number";
-  } else {
-    throw "id value is not ok";
+  }
+  if (parseInt(Student.id) != Student.id) {
+    throw "Student id has to be an integer";
   }
 
   if (Student.firstName == undefined) {
     throw "firstName is required";
-  } else if (typeof Student.firstName == "string") {
-    throw"firstName has to be string";
-  } else {
-    throw "firstName is not ok";
-  }
+  } if (typeof Student.firstName != "string") {
+    throw "firstName has to be a string";
+  } 
 
   if (Student.lastName == undefined) {
     throw "lastName is required";
-  } else if (typeof Student.lastName == "string") {
+  }  if (typeof Student.lastName != "string") {
     throw "lastName has to be string";
-  } else {
-    throw "lastName is not ok";
-  }
+  } 
 
   if (Student.phone == undefined) {
     throw "phone number is required";
-  } else if (typeof Student.phone == "number") {
-    throw "phone number is ok";
-  } else {
-    throw "phone number is not ok";
+  } 
+  
+
+  if(parseInt(Student.phone) != Student.phone){
+    throw "phone number has to be number";
   }
 
   for (const element in Student.classes) {
-    console.log(Student.classes[element].classId);
-    console.log(Student.classes[element].subjectName);
-    console.log(Student.classes[element].obtainMark);
+    
 
     if (Student.classes[element].classId == undefined) {
       throw "class id is required";
-    } else if (typeof Student.classes[element].classId == "number") {
-      throw "class id is ok";
-    } else {
-      throw "class id is not ok";
-    }
+    } if (parseInt(Student.classes[element].classId) != Student.classes[element].classId) {
+      throw "class id has to be an integer";
+    } 
     if (Student.classes[element].subjectName == undefined) {
       throw "subject name is required";
-    } else if (typeof Student.classes[element].subjectName == "string") {
-      throw "subject name is ok";
-    } else {
-      throw "subject name is not ok";
-    }
+    } if (typeof Student.classes[element].subjectName != "string") {
+      throw "subject name has to be a string";
+    } 
 
     if (Student.classes[element].obtainMark == undefined) {
       throw "obtain mark is required";
-    } else if (typeof Student.classes[element].obtainMark == "number") {
-      throw "obtain mark is ok";
-    } else {
-      throw"obtain mark is not ok";
-    }
+    } else if (parseInt(Student.classes[element].obtainMark) != Student.classes[element].obtainMark) {
+      throw "obtain mark has to be a number";
+    } 
   }
 
-  // console.log(Student.address.line1);
-  // console.log(Student.address.line2);
-  // console.log(Student.address.thana);
-  // console.log(Student.address.district);
-  // console.log(Student.address.postcode);
+
 
   if (Student.address.line1 == undefined) {
     throw "line1 is required";
-  } else if (typeof Student.address.line1 == "string") {
-    throw "line1 is ok";
-  } else {
-    throw "line1 is  not ok";
-  }
+  } if (typeof Student.address.line1 != "string") {
+    throw "line1 has to be string";
+  } 
   if (Student.address.line2 == undefined) {
     throw "line2 is required";
-  } else if (typeof Student.address.line2 == "string") {
-    throw "line2 is ok";
-  } else {
-    throw "line2 is  not ok";
-  }
+  } if (typeof Student.address.line2 != "string") {
+    throw "line2 has to be string";
+  } 
 
   if (Student.address.thana == undefined) {
-    throw "thana is required";
-  } else if (typeof Student.address.thana == "string") {
-    throw "thana is ok";
-  } else {
-    throw "thana is  not ok";
-  }
+    throw "thana name is required";
+  }  if (typeof Student.address.thana != "string") {
+    throw "thana name has to be string";
+  } 
 
-  if (typeof Student.address.district == "string") {
-    throw "district is ok";
-  } else {
-    throw "district is  required";
-  }
+  if(Student.address.district == undefined){
+    throw "ditrict name is required";
+  }if (typeof Student.address.district != "string") {
+    throw "district name has to be string";
+  } 
 
   if (Student.address.postcode == undefined) {
     throw "post code is required";
-  } else if (typeof Student.address.postcode == "number") {
-    throw "postcode is ok";
-  } else {
-    throw "postcode is  not ok";
+  } if (parseInt(Student.address.postcode) != Student.address.postcode) {
+    throw "postcode has to be number";
+  } 
+
+  if (Student.subjectId == undefined) {
+    throw "Suject Id is required";
   }
-  
-    
-    if (Student.subjectId.length == 0) {
-      throw "subject id can be blank";
-    } else if (typeof Student.subjectId == "number") {
-      throw "subject id is ok";
-    } else {
-      throw "subject id is required";
+  if (!Array.isArray(Student.subjectId)) {
+    throw "Suject Id has to be an array";
+  }
+
+  for (let i = 0; i < Student.subjectId.length; i++) {
+    if (Student.subjectId[i] != parseInt(Student.subjectId[i])) {
+      throw "Subject Id has to be an array of integers";
     }
+  }
+
   
+
   if (Student.dateOfBirth == undefined) {
     throw "date of birth is required";
-  } else if (typeof Student.dateOfBirth == "string") {
-    throw "date of birth is ok";
-  } else {
-    throw "date of birth is not ok";
-  }
+  }  if (typeof Student.dateOfBirth != "string") {
+    throw "date of birth has to be string";
+  } 
+
+  console.log("ALL INPUT IS OK");
 }
+
+
 
 input();
