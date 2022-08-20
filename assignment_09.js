@@ -1,8 +1,8 @@
 const Student = {
   id: 102,
-  firstName: 'labib',
+  firstName: 'Labib',
   lastName: "Hasan",
-  phone: 1521334597,
+  phone: '01521334597',
 
   classes: [
     {
@@ -57,7 +57,7 @@ function input() {
   } 
   
 
-  if(parseInt(Student.phone) != Student.phone){
+  if(Number(Student.phone) != Student.phone){
     throw "phone number has to be number";
   }
 
@@ -109,7 +109,7 @@ function input() {
 
   if (Student.address.postcode == undefined) {
     throw "post code is required";
-  } if (parseInt(Student.address.postcode) != Student.address.postcode) {
+  } if (Number(Student.address.postcode) != Student.address.postcode) {
     throw "postcode has to be number";
   } 
 
