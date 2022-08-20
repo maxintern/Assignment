@@ -1,18 +1,18 @@
 const Student = {
-  id: 102,
-  firstName: 'Labib',
+  id: 12,
+  firstName: 'abc',
   lastName: "Hasan",
-  phone: '01521334597',
+  phone: '50005',
 
   classes: [
     {
-      classId: 102,
+      classId: 12,
       subjectName: "English",
       obtainMark: 80,
     },
 
     {
-      classId: 103,
+      classId: 12,
       subjectName: "Math",
       obtainMark: 90,
     },
@@ -23,7 +23,7 @@ const Student = {
     line2: "World",
     thana: "Kafrul",
     district: "dhaka",
-    postcode: 8602,
+    postcode: 12065,
   },
 
   subjectId: [10, 20, 30],
@@ -36,11 +36,11 @@ function input() {
   if (Student.id == undefined) {
     throw "id is required";
   }
-  if (parseInt(Student.id) != Student.id) {
+  if (parseInt(Student.id) !== Student.id) {
     throw "Student id has to be an integer";
   }
 
-  if (Student.firstName == undefined) {
+  if (Student.firstName == undefined ) {
     throw "firstName is required";
   } if (typeof Student.firstName != "string") {
     throw "firstName has to be a string";
@@ -57,8 +57,8 @@ function input() {
   } 
   
 
-  if(Number(Student.phone) != Student.phone){
-    throw "phone number has to be number";
+  if(Number(Student.phone) != Student.phone ||  Student.phone.indexOf(".") != -1){
+    throw "phone number has to be numeric";
   }
 
   for (const element in Student.classes) {
@@ -66,7 +66,7 @@ function input() {
 
     if (Student.classes[element].classId == undefined) {
       throw "class id is required";
-    } if (parseInt(Student.classes[element].classId) != Student.classes[element].classId) {
+    } if (parseInt(Student.classes[element].classId) !== Student.classes[element].classId) {
       throw "class id has to be an integer";
     } 
     if (Student.classes[element].subjectName == undefined) {
@@ -77,7 +77,7 @@ function input() {
 
     if (Student.classes[element].obtainMark == undefined) {
       throw "obtain mark is required";
-    } else if (parseInt(Student.classes[element].obtainMark) != Student.classes[element].obtainMark) {
+    } else if (parseInt(Student.classes[element].obtainMark) !== Student.classes[element].obtainMark) {
       throw "obtain mark has to be a number";
     } 
   }
@@ -109,8 +109,8 @@ function input() {
 
   if (Student.address.postcode == undefined) {
     throw "post code is required";
-  } if (Number(Student.address.postcode) != Student.address.postcode) {
-    throw "postcode has to be number";
+  } if (Number(Student.address.postcode)!= Student.address.postcode || `${Student.address.postcode}`.indexOf(".") != -1) {
+    throw "postcode has to be numeric";
   } 
 
   if (Student.subjectId == undefined) {
@@ -121,7 +121,7 @@ function input() {
   }
 
   for (let i = 0; i < Student.subjectId.length; i++) {
-    if (Student.subjectId[i] != parseInt(Student.subjectId[i])) {
+    if (Student.subjectId[i] !== parseInt(Student.subjectId[i])) {
       throw "Subject Id has to be an array of integers";
     }
   }
