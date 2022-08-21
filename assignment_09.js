@@ -26,138 +26,63 @@ const Student = {
     postcode: "0123",
   },
 
-  subjectId: [10,20,30],
+  subjectId: [10, 20, 30],
   dateOfBirth: "15.06.1998",
 };
 
-function input() {
+function validateStudent() {
   // console.log(Student.phone);
 
-  
   let num1 = Student.phone;
   let text = num1.toString();
   let num2 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
   let value = 0;
 
+  // Student ID validation start
   if (Student.id == undefined) {
     throw "id is required";
   }
   if (parseInt(Student.id) !== Student.id) {
     throw "Student id has to be an integer";
   }
+  // Student ID validation end
 
-  if (Student.firstName == undefined) {
+  // Student first name validation start
+  if (!Student.firstName) {
     throw "firstName is required";
   }
   if (typeof Student.firstName != "string") {
     throw "firstName has to be a string";
   }
+  // Student first name validation end
 
+  // Student last name validation start
   if (Student.lastName == undefined) {
     throw "lastName is required";
   }
   if (typeof Student.lastName != "string") {
     throw "lastName has to be string";
   }
+  // Student last name validation end
 
+  // Student phone validation start
   if (Student.phone == undefined) {
     throw "phone number is required";
   }
 
-  if (Number(Student.phone) != Student.phone) {
-    throw "phone number has to be numeric";
-  }
-
-  // if(text[0] != 0){
-  //   throw "Can be start with zero";
-  // }
-
   for (let i = 0; i < text.length; i++) {
     if (num2.indexOf(text[i]) == -1) {
-      value += 1;
-
       throw "phone number has to be numeric";
     }
   }
+  // Student phone validation end
 
-  for (const element in Student.classes) {
-    if (Student.classes[element].classId == undefined) {
-      throw "class id is required";
-    }
-    if (
-      parseInt(Student.classes[element].classId) !==
-      Student.classes[element].classId
-    ) {
-      throw "class id has to be an integer";
-    }
-    if (Student.classes[element].subjectName == undefined) {
-      throw "subject name is required";
-    }
-    if (typeof Student.classes[element].subjectName != "string") {
-      throw "subject name has to be a string";
-    }
-
-    if (
-      parseInt(Student.classes[element].obtainMark) !==
-      Student.classes[element].obtainMark
-    ) {
-      throw "obtain mark has to be a number";
-    }
-    // console.log(Student.classes[element].obtainMark);
-    if (
-      Student.classes[element].obtainMark < 0 ||
-      Student.classes[element].obtainMark > 100
-    ) {
-      throw "obtain mark should between 0 to 100 numbers";
-    }
-  }
-
-  if (Student.address.line1 == undefined) {
-    throw "line1 is required";
-  }
-  if (typeof Student.address.line1 != "string") {
-    throw "line1 has to be string";
-  }
-  // if (Student.address.line2 == undefined) {
-  //   throw "line2 is required";}
-  if (typeof Student.address.line2 != "string") {
-    throw "line2 has to be string";
-  }
-
-  if (Student.address.thana == undefined) {
-    throw "thana name is required";
-  }
-  if (typeof Student.address.thana != "string") {
-    throw "thana name has to be string";
-  }
-
-  if (Student.address.district == undefined) {
-    throw "ditrict name is required";
-  }
-  if (typeof Student.address.district != "string") {
-    throw "district name has to be string";
-  }
-
-  if (Student.address.postcode == undefined) {
-    throw "post code is required";
-  }
-  if (Number(Student.address.postcode) != Student.address.postcode) {
-    throw "postcode has to be numeric";
-  }
-
-  for (let i = 0; i < text.length; i++) {
-    if (num2.indexOf(text[i]) == -1) {
-      value += 1;
-
-      throw "postcode has to be numeric";
-    }
-  }
-
+  // Student subject id validation start
   if (Student.subjectId == undefined) {
-    throw "Suject Id is required";
+    throw "Subject Id is required";
   }
   if (!Array.isArray(Student.subjectId)) {
-    throw "Suject Id has to be an array";
+    throw "Subject Id has to be an array";
   }
 
   for (let i = 0; i < Student.subjectId.length; i++) {
@@ -165,15 +90,113 @@ function input() {
       throw "Subject Id has to be an array of integers";
     }
   }
+  // Student subject id validation end
 
+  // Student date of birth id validation start
   if (Student.dateOfBirth == undefined) {
     throw "date of birth is required";
   }
-  if (typeof Student.dateOfBirth != "string") {
-    throw "date of birth has to be string";
+  if (Date.parse(Student.dateOfBirth) == NaN ) {
+    throw "date of birth has to be a date string";
+  }
+  // Student date of birth validation end
+
+  if(Student.classes == undefined){
+    throw "classes is required";
   }
 
-  console.log("ALL INPUT IS OK");
+  if(!Array.isArray(Student.classes)){
+    throw "Classes has to be an array";
+  }
+
+  if(Student.classes.length <1){
+    throw "Classes length has to be at least 1";
+  }
+  
+  for (let i = 0; i < Student.classes.length; i++) {
+    const element = Student.classes[i];
+    validateClass(element);    
+  }
+  
+
+  validateAddress(Student.address);
+
+  console.log("All INPUT IS OK");
 }
 
-input();
+validateStudent();
+
+function validateClass(classData) {
+  if (typeof classData != "object") {
+    throw "class data should be an object";
+  }
+
+  if (classData.classId == undefined) {
+    throw "class id is required";
+  }
+  if ( parseInt(classData.classId) != classData.classId ) {
+    throw "class id has to be an integer";
+  }
+  if (classData.subjectName == undefined) {
+    throw "subject name is required";
+  }
+  if (typeof classData.subjectName != "string") {
+    throw "subject name has to be a string";
+  }
+
+  if ( parseFloat(classData.obtainMark) != classData.obtainMark ) {
+    throw "obtain mark has to be a number";
+  }
+
+  if ( classData.obtainMark < 0 || classData.obtainMark > 100 ) {
+    throw "obtain mark should between 0 and 100";
+  }
+}
+
+function validateAddress(addressData) {
+  let num1 = Student.address.postcode;
+  let text = num1.toString();
+  let num2 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+  let value = 0;
+  if (typeof addressData != "object") {
+    throw "address data should be validate";
+  }
+  if (addressData.line1 == undefined) {
+    throw "line1 is required";
+  }
+  if (typeof addressData.line1 != "string") {
+    throw "line1 has to be string";
+  }
+  
+  if (typeof addressData.line2 != "string") {
+    throw "line2 has to be string";
+  }
+
+  if (addressData.thana == undefined) {
+    throw "thana name is required";
+  }
+  if (typeof addressData.thana != "string") {
+    throw "thana name has to be string";
+  }
+
+  if (addressData.district == undefined) {
+    throw "ditrict name is required";
+  }
+  if (typeof addressData.district != "string") {
+    throw "district name has to be string";
+  }
+
+  if (addressData.postcode == undefined) {
+    throw "post code is required";
+  }
+  // if (Number(Student.address.postcode) != Student.address.postcode) {
+  //   throw "postcode has to be numeric";
+  // }
+
+  for (let i = 0; i < text.length; i++) {
+    if (num2.indexOf(text[i]) == -1) {
+      throw "postcode has to be numeric";
+    }
+  }
+
+}
